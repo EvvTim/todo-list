@@ -43,7 +43,7 @@ const prepareDOMEvents = () => {
     $ulList.addEventListener('click', checkClick);
     $closeTodoBtn.addEventListener('click', closePopup);
     $addPopupBtn.addEventListener('click', changeTodo);
-    $closeTodoBtn
+    $todoInput.addEventListener('keyup', enterCheck);
 
 };
 
@@ -110,7 +110,7 @@ const checkClick = (e) => {
         e.target.closest('li').classList.toggle('completed');
         e.target.closest('button').classList.toggle('completed');
 
-        
+
     } else if (e.target.closest('button').className === 'edit') {
 
         editTask(e);
@@ -134,7 +134,7 @@ const changeTodo = () => {
         $editedTodo.firstChild.textContent = $popupInput.value;
         $popup.style.display = 'none';
         $popupInfo.innerText = '';
-        
+
     } else {
         $popupInfo.innerText = 'Musisz podać jakąś treść!'
     }
@@ -155,6 +155,12 @@ const deleteTask = (e) => {
         $alertInfo.innerText = 'Brak zadań na liście.';
     }
 
+}
+
+const enterCheck = () => {
+    if (event.keyCode === 13) {
+        addNewTask()
+    }
 }
 
 document.addEventListener('DOMContentLoaded', main);
